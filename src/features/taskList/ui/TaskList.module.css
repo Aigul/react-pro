@@ -1,0 +1,37 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.filterButton {
+  padding: 6px 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.filterButton:hover {
+  border-color: #4caf50;
+  color: #4caf50;
+}
+
+.filterButtonActive {
+  background-color: #4caf50;
+  color: #fff;
+  border-color: #4caf50;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
