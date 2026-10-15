@@ -10,9 +10,9 @@ const filters: { value: Filter; label: string }[] = [
 ]
 
 export function TaskList() {
-  const { tasks, filter, setFilter, removeTask } = useTasks()
+  const { filteredTasks, filter, setFilter, removeTask } = useTasks()
 
-  const filtered = tasks.filter((task) => {
+  const filtered = filteredTasks.filter((task) => {
     if (filter === 'completed') return task.completed
     if (filter === 'incomplete') return !task.completed
     return true
