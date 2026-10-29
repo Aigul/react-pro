@@ -1,4 +1,6 @@
+import { memo } from 'react'
 import type { Task } from '../model/types'
+
 import styles from './TaskCard.module.css'
 
 type Props = {
@@ -6,7 +8,7 @@ type Props = {
   onRemove?: () => void
 }
 
-export function TaskCard({ task, onRemove }: Props) {
+export const TaskCard = memo(({ task, onRemove }: Props) => {
   return (
     <div className={`${styles.card} ${task.completed ? styles.completed : ''}`}>
       <div
@@ -20,6 +22,6 @@ export function TaskCard({ task, onRemove }: Props) {
       )}
     </div>
   )
-}
+})
 
 export default TaskCard
