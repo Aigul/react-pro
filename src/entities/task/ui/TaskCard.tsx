@@ -5,7 +5,7 @@ import styles from './TaskCard.module.css'
 
 type Props = {
   task: Task
-  onRemove?: () => void
+  onRemove?: (id: number) => void
 }
 
 export const TaskCard = memo(({ task, onRemove }: Props) => {
@@ -16,7 +16,10 @@ export const TaskCard = memo(({ task, onRemove }: Props) => {
       />
       <span className={styles.title}>{task.title}</span>
       {onRemove && (
-        <button className={styles.removeButton} onClick={onRemove}>
+        <button
+          className={styles.removeButton}
+          onClick={() => onRemove(task.id)}
+        >
           ✕
         </button>
       )}
