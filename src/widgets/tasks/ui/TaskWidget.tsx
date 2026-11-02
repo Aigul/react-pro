@@ -1,10 +1,8 @@
 import { TaskList } from 'features/taskList/ui/TaskList'
-import styles from './TaskWidget.module.css'
+import { useTasks } from 'features/taskList/model/useTasks'
 
 export function TaskWidget() {
-  return (
-    <section className={styles.widget}>
-      <TaskList />
-    </section>
-  )
+  const { filteredTasks, removeTask } = useTasks()
+
+  return <TaskList tasks={filteredTasks} removeTask={removeTask} />
 }

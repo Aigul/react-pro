@@ -1,23 +1,35 @@
-import { useState } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import type { Task } from 'entities/task/model/types'
+import { useGetTasksQuery } from 'entities/task/api/tasksApi'
 
-type Filter = 'all' | 'completed' | 'incomplete'
-
-const initialTasks: Task[] = [
-  { id: '1', title: 'Посмотреть вебинар по 1 уроку', completed: true },
-  { id: '2', title: 'Создать проект', completed: false },
-  { id: '3', title: 'Изучить TypeScript', completed: false },
-]
+export type Filter = 'all' | 'completed' | 'incomplete'
 
 export function useTasks() {
-  const [tasks, setTasks] = useState<Task[]>(initialTasks)
+  const { data: serverTasks } = useGetTasksQuery()
+
+  const [tasks, setTasks] = useState<Task[]>([])
   const [filter, setFilter] = useState<Filter>('all')
 
-  const removeTask = (id: string) => {
+  useEffect(() => {
+    if (serverTasks) {
+      setTasks(serverTasks)
+    }
+  }, [serverTasks])
+
+  const filteredTasks = useMemo(() => {
+    switch (filter) {
+      case 'completed':
+        return tasks.filter((task) => task.completed)
+      case 'incomplete':
+        return tasks.filter((task) => !task.completed)
+      default:
+        return tasks
+    }
+  }, [tasks, filter])
+
+  const removeTask = useCallback((id: number) => {
     setTasks((prev) => prev.filter((t) => t.id !== id))
-  }
+  }, [])
 
-  return { tasks, filter, setFilter, removeTask }
+  return { filteredTasks, filter, setFilter, removeTask }
 }
-
-export type { Filter }

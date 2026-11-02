@@ -1,12 +1,14 @@
+import { memo } from 'react'
 import type { Task } from '../model/types'
+
 import styles from './TaskCard.module.css'
 
 type Props = {
   task: Task
-  onRemove?: () => void
+  onRemove?: (id: number) => void
 }
 
-export function TaskCard({ task, onRemove }: Props) {
+export const TaskCard = memo(({ task, onRemove }: Props) => {
   return (
     <div className={`${styles.card} ${task.completed ? styles.completed : ''}`}>
       <div
@@ -14,12 +16,15 @@ export function TaskCard({ task, onRemove }: Props) {
       />
       <span className={styles.title}>{task.title}</span>
       {onRemove && (
-        <button className={styles.removeButton} onClick={onRemove}>
+        <button
+          className={styles.removeButton}
+          onClick={() => onRemove(task.id)}
+        >
           ✕
         </button>
       )}
     </div>
   )
-}
+})
 
 export default TaskCard
