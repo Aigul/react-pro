@@ -1,0 +1,37 @@
+/* PreviousInput */
+.previous-input {
+  margin-bottom: 32px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+}
+
+.previous-input h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.previous-input input {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 15px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text-h);
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.previous-input input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-bg);
+}
+
+.previous-input p {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--text);
+}

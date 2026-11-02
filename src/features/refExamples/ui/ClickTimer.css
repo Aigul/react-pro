@@ -1,0 +1,30 @@
+/* ClickTimer */
+.click-timer {
+  margin-bottom: 32px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+}
+
+.click-timer h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.click-timer button {
+  padding: 10px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.click-timer button:hover {
+  opacity: 0.85;
+}
+
