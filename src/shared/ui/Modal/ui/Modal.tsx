@@ -1,4 +1,4 @@
-import { MouseEvent, ReactNode, useEffect, useRef } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import s from './Modal.module.css';
 
@@ -112,20 +112,15 @@ export const Modal = ({ isOpen, onClose, children }: ModalProps) => {
 		return null;
 	}
 
-	const handleOverlayMouseDown = (e: MouseEvent<HTMLDivElement>) => {
-		if (e.target === e.currentTarget) {
-			onCloseRef.current();
-		}
-	};
-
 	return createPortal(
-		<div className={s.overlay} onMouseDown={handleOverlayMouseDown}>
+		<div className={s.overlay} onClick={() => onCloseRef.current()}>
 			<div
 				className={s.dialog}
 				role='dialog'
 				aria-modal='true'
 				tabIndex={-1}
-				ref={dialogRef}>
+				ref={dialogRef}
+				onClick={(e) => e.stopPropagation()}>
 				<button
 					type='button'
 					className={s.close}

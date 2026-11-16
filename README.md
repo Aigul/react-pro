@@ -115,7 +115,7 @@ const isInCart = cartProducts.some((p) => p.id === product.id);
 Реализовано:
 
 - закрытие по `Escape`;
-- закрытие по клику на overlay (с проверкой `target === currentTarget`);
+- закрытие по клику на overlay (с `stopPropagation` на содержимом модалки);
 - **focus trap**: при открытии фокус уходит внутрь, `Tab`/`Shift+Tab` циклится внутри;
 - при закрытии фокус возвращается на кнопку, которая открыла модалку;
 - блокировка прокрутки страницы (`body.overflow = 'hidden'`).
