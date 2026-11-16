@@ -17,6 +17,10 @@
 		"resolveJsonModule": true,
 		"sourceMap": true,
 		"allowJs": true /* Allow javascript files to be compiled. Useful when migrating JS to TS */,
+		"baseUrl": "." /* Base directory to resolve non-relative module names. */,
+		"paths": {
+			"@/*": ["src/*"]
+		} /* Path aliases for clean FSD imports. */,
 		// "checkJs": true /* Report errors in .js files. Works in tandem with allowJs. */,
 		"plugins": [{ "name": "typescript-plugin-css-modules" }]
 	},

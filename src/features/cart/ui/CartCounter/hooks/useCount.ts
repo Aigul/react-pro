@@ -1,0 +1,40 @@
+import { ChangeEvent } from 'react';
+import { useDispatch } from 'react-redux';
+import { cartActions, cartSelectors } from '@/entities/cart';
+import { useAppSelector } from '@/shared/lib/redux/hooks';
+
+const MIN_COUNT = 1;
+const MAX_COUNT = 99;
+
+export const useCount = (productId: string) => {
+	const dispatch = useDispatch();
+	// Точечный селектор вместо выборки всего массива корзины. Благодаря
+	// стабильным ссылкам в setCartProductCount перерисуется только тот
+	// счётчик, чей товар реально изменился.
+	const product = useAppSelector((state) =>
+		cartSelectors.selectCartProductById(state, productId)
+	) as CartProduct;
+
+	const { id, count, stock } = product;
+	const handleIncrement = () => {
+		const newCount = count + 1;
+		const validCount = newCount > MAX_COUNT ? MAX_COUNT : newCount;
+		dispatch(cartActions.setCartProductCount({ id, count: validCount }));
+	};
+	const handleDecrement = () => {
+		const newCount = count - 1;
+		const validCount = newCount < MIN_COUNT ? MIN_COUNT : newCount;
+		dispatch(cartActions.setCartProductCount({ id, count: validCount }));
+	};
+	const handleSetCount = (e: ChangeEvent<HTMLInputElement>) => {
+		const newCount = +e.target.value;
+		const validCount =
+			newCount > MAX_COUNT
+				? MAX_COUNT
+				: newCount < MIN_COUNT
+				? MIN_COUNT
+				: newCount;
+		dispatch(cartActions.setCartProductCount({ id, count: validCount }));
+	};
+	return { count, stock, handleSetCount, handleIncrement, handleDecrement };
+};

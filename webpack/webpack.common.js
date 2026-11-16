@@ -45,9 +45,22 @@ module.exports = {
 				},
 			},
 			{
-				test: /\.svg$/i,
-				issuer: /\.[jt]sx?$/,
-				use: ['@svgr/webpack', 'url-loader'],
+				oneOf: [
+					{
+						// SVG как React-компонент: import Icon from './x.svg?react'
+						test: /\.svg$/i,
+						issuer: /\.[jt]sx?$/,
+						resourceQuery: '?react',
+						use: ['@svgr/webpack'],
+					},
+					{
+						// SVG как URL: import iconUrl from './x.svg'
+						test: /\.svg$/i,
+						issuer: /\.[jt]sx?$/,
+						resourceQuery: { not: ['?react'] },
+						use: ['@svgr/webpack', 'url-loader'],
+					},
+				],
 			},
 			{
 				test: /\.css$/,
@@ -71,6 +84,9 @@ module.exports = {
 	},
 	resolve: {
 		extensions: ['.js', '.jsx', '.tsx', '.ts', '.json'], //указываем файлы с которыми будет работать webpack
+		alias: {
+			'@': path.resolve(__dirname, '..', 'src'),
+		},
 	},
 	plugins: [
 		new HTMLWebpackPlugins({
