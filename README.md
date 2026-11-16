@@ -203,7 +203,7 @@ npm run dev:vite     # http://localhost:5173
 
 Сердечко закрашивается сразу, не дожидаясь ответа сервера; при ошибке — откатывается обратно.
 
-![img_6.png](img_6.png)
+![img_optimistic.png](img_optimistic.png)
 
 ### 3. Оптимизация рендеров
 
