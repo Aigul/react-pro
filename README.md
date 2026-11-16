@@ -126,22 +126,6 @@ const [optimisticLiked, setOptimisticLiked] = useOptimistic(
 
 **Вывод:** Vite собирается примерно в 9–10 раз быстрее и даёт немного меньший бандл (в основном за счёт CSS).
 
-### Как замерить
-
-Время:
-
-```powershell
-Measure-Command { npm.cmd run build }        # Webpack
-Measure-Command { npm.cmd run build:vite }   # Vite
-```
-
-Размер:
-
-```powershell
-Get-ChildItem dist -Recurse -File | Measure-Object Length -Sum       # Webpack
-Get-ChildItem dist-vite -Recurse -File | Measure-Object Length -Sum  # Vite
-```
-
 Webpack собирает в `dist/`, Vite — в `dist-vite/`.
 
 ---
@@ -186,7 +170,7 @@ npm run dev:vite     # http://localhost:5173
 
 Сердечко закрашивается сразу, не дожидаясь ответа сервера; при ошибке — откатывается обратно.
 
-![img_optimistic.gif](img_optimistic.gif)
+![img_6.png](img_6.png)
 
 ### 3. Оптимизация рендеров
 
