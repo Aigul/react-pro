@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/redux/hooks';
 import { userSelectors } from '@/entities/user';
 import { isLiked } from '@/entities/product';
@@ -41,12 +41,10 @@ export const useProducts = ({ onlyFavorites = false }: UseProductsParams = {}) =
 			perPage: onlyFavorites ? undefined : perPage,
 		});
 
-	const products = useMemo(() => {
-		const list = data?.products ?? [];
-		return onlyFavorites
-			? list.filter((product) => isLiked(product.likes, user?.id))
-			: list;
-	}, [data?.products, onlyFavorites, user?.id]);
+	const list = data?.products ?? [];
+	const products = onlyFavorites
+		? list.filter((product) => isLiked(product.likes, user?.id))
+		: list;
 
 	return {
 		products,

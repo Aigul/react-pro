@@ -28,7 +28,7 @@
 
 - [x] Profiler: найден hotspot (`AddToCartButton`) и описан кратко
 - [x] уместный `React.memo`
-- [x] точечные `useMemo`/`useCallback` для тяжёлых вычислений/колбэков в списках
+- [x] точечный `useCallback` для колбэков в списках
 
 ### 3. React.Portal (модалка, доступность) — 3 балла
 
@@ -102,7 +102,6 @@ const isInCart = cartProducts.some((p) => p.id === product.id);
 - `selectCartTotals` через `createSelector` — сумма пересчитывается только при изменении корзины;
 - в редьюсере `setCartProductCount` теперь меняется ссылка только у изменённого товара;
 - `React.memo(ProductCard)` — карточка не перерисовывается, если `product` не изменился;
-- `useMemo` в `useProducts` — стабильный массив товаров (иначе `memo` бесполезен);
 - `useCallback` в `useAddToCart` / `useLoadMore` — стабильные ссылки на обработчики.
 
 **Результат.** Один клик «В корзину» перерисовывает **одну** кнопку вместо всех кнопок списка; при рефетче (например, после лайка) карточки не перерисовываются — за это отвечает `React.memo(ProductCard)`.
